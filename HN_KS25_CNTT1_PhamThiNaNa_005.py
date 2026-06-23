@@ -13,6 +13,7 @@ class Booking:
         self.rent_type = ""
 
         self.update_info()
+
     def calculate_total_rent(self):
         self.total_rent = self.room_price * self.nights + self.service_fee + self.discount
         if self.total_rent < 0:
@@ -58,7 +59,7 @@ def validate_nights():
     while True:
         try:
             quantity = float(input(f'Nhập số đêm thuê: '))
-            if quantity < 1 or quantity > 365 :
+            if quantity < 1 or quantity > 365:
                 print(f'Số đêm thuê phải là số nguyên từ 1 đến 365')
                 continue
 
@@ -67,9 +68,12 @@ def validate_nights():
         except ValueError:
             print(f'Số đêm thuê phải là số!')
 
+
+
 class BookingManager:
     def __init__(self):
         self.bookings = []
+
 
     def find_id(self, id):
         for booking in self.bookings:
@@ -77,6 +81,7 @@ class BookingManager:
                 return booking
         return None
     
+
     def add_booking(self):
         while True:
             id = input_not_empty('mã đặt phòng').upper()
@@ -154,6 +159,7 @@ class BookingManager:
 
         print('Cập nhật đặt phòng thành công!')
 
+
     def delete_booking(self):
         id = input_not_empty('mã đặt phòng muốn xóa').upper()
         booking = self.find_id(id)
@@ -169,6 +175,7 @@ class BookingManager:
             else:
                 print('Lựa chọn không hợp lệ')
 
+
     def search_booking(self):
         find_name = input('Nhập tên khách hàng hoặc số phòng bạn muốn tìm kiếm: ')
         results = []
@@ -182,6 +189,8 @@ class BookingManager:
             for result in results:
                 print(f'{result.customer_name} - {result.room_number}')
 
+
+
 def show_menu():
     print("""
 ================ MENU ================
@@ -193,25 +202,33 @@ def show_menu():
 6. Thoát
 =====================================""")
     
+
 def main():
     booking = BookingManager()
 
     while True:
         show_menu()
         choice = input('Nhập lựa chọn của bạn: ')
+
         if choice == '1':
             booking.show_all()
+
         elif choice == '2':
             booking.add_booking()
+
         elif choice == '3':
             booking.update_booking()
+
         elif choice == '4':
             booking.delete_booking()
+
         elif choice == '5':
             booking.search_booking()
+            
         elif choice == '6':
             print('Cảm ơn bạn đã sử dụng hệ thống quản lý đặt phòng khách sạn!')
             break
+
         else:
             print('Lựa chọn không hợp lệ!')
 
